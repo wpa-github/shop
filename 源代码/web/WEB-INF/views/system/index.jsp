@@ -11,7 +11,8 @@
 <script type="text/javascript" src="../resources/admin/easyui/easyui/1.3.4/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../resources/admin/easyui/easyui/1.3.4/locale/easyui-lang-zh_CN.js"></script>
 <script>
-    var pc;
+    var pc; 
+    //不要放在$(function(){});中
     $.parser.onComplete = function () {
         if (pc) clearTimeout(pc);
         pc = setTimeout(closes, 1000);

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import cn.edu.imnu.entity.admin.Menu;
 
 /**
- * ²Ëµ¥¹ÜÀídao
+ * èœå•ç®¡ç†dao
  * @author llq
  *
  */

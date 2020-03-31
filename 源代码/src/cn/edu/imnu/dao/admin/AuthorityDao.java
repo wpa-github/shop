@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import cn.edu.imnu.entity.admin.Authority;
 
 /**
- * 权限实现类dao
+ * 鏉冮檺瀹炵幇绫籨ao
  * @author llq
  *
  */

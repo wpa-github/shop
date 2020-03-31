@@ -25,8 +25,6 @@
 		<property name="jdbcUrl" value="${url}"/>
 		<property name="user" value="${user}"/>
 		<property name="password" value="${password}"/>
-
-
 	</bean>
 
 	<!-- 事务管理器 （JDBC） -->

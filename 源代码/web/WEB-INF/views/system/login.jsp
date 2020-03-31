@@ -31,7 +31,14 @@
 					<div class="login-center-input-text">密码</div>
 				</div>
 			</div>
-
+			<div class="login-center clearfix">
+				<div class="login-center-img"><img src="../resources/admin/login/images/cpacha.png"></div>
+				<div class="login-center-input">
+					<input style="width:50%;" type="text" name="cpacha" id="cpacha" value="" placeholder="请输入验证码" onfocus="this.placeholder=&#39;&#39;" onblur="this.placeholder=&#39;请输入验证码&#39;">
+					<div class="login-center-input-text">验证码</div>
+					<img id="cpacha-img" title="点击切换验证码" style="cursor:pointer;" src="get_cpacha" width="110px" height="30px" onclick="changeCpacha()">
+				</div>
+			</div>
 			<div class="login-button">
 				登录
 			</div>
@@ -67,7 +74,7 @@
 	}
 	
 	function changeCpacha(){
-		$("#cpacha-img").attr("src",'get_cpacha?vl=4&w=150&h=40&type=loginCpacha&t=' + new Date().getTime());
+		$("#cpacha-img").attr("src",'get_cpacha?t=' + new Date().getTime());
 	}
 		document.querySelector(".login-button").onclick = function(){
 				var username = $("#username").val();
@@ -81,7 +88,10 @@
 					alert("请填写密码！");
 					return;
 				}
-
+				if(cpacha == '' || cpacha == 'undefined'){
+					alert("请填写验证码！");
+					return;
+				}
 				addClass(document.querySelector(".login"), "active")
 				addClass(document.querySelector(".sk-rotating-plane"), "active")
 				document.querySelector(".login").style.display = "none"

@@ -1,10 +1,14 @@
 package cn.edu.imnu.controller.admin;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
@@ -12,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,35 +25,39 @@ import cn.edu.imnu.entity.admin.Menu;
 import cn.edu.imnu.entity.admin.Role;
 import cn.edu.imnu.entity.admin.User;
 import cn.edu.imnu.service.admin.AuthorityService;
+import cn.edu.imnu.service.admin.LogService;
 import cn.edu.imnu.service.admin.MenuService;
 import cn.edu.imnu.service.admin.RoleService;
 import cn.edu.imnu.service.admin.UserService;
+import cn.edu.imnu.util.CpachaUtil;
 import cn.edu.imnu.util.MenuUtil;
 
 /**
- * ÏµÍ³²Ù×÷Àà¿ØÖÆÆ÷
+ * ç³»ç»Ÿæ“ä½œç±»æ§åˆ¶å™¨
  * @author llq
  *
  */
 @Controller
 @RequestMapping("/system")
 public class SystemController {
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private RoleService roleService;
-	
+
 	@Autowired
 	private AuthorityService authorityService;
-	
+
 	@Autowired
 	private MenuService menuService;
-	
-	
+
+	@Autowired
+	private LogService logService;
+
 	/**
-	 * ÏµÍ³µÇÂ¼ºóµÄÖ÷Ò³
+	 * ç³»ç»Ÿç™»å½•åçš„ä¸»é¡µ
 	 * @param model
 	 * @return
 	 */
@@ -60,9 +69,9 @@ public class SystemController {
 		model.setViewName("system/index");
 		return model;//WEB-INF/views/+system/index+.jsp = WEB-INF/views/system/index.jsp
 	}
-	
+
 	/**
-	 * ÏµÍ³µÇÂ¼ºóµÄ»¶Ó­Ò³
+	 * ç³»ç»Ÿç™»å½•åçš„æ¬¢è¿é¡µ
 	 * @param model
 	 * @return
 	 */
@@ -72,7 +81,7 @@ public class SystemController {
 		return model;
 	}
 	/**
-	 * µÇÂ½Ò³Ãæ
+	 * ç™»é™†é¡µé¢
 	 * @param model
 	 * @return
 	 */
@@ -81,9 +90,9 @@ public class SystemController {
 		model.setViewName("system/login");
 		return model;
 	}
-	
+
 	/**
-	 * µÇÂ¼±íµ¥Ìá½»´¦Àí¿ØÖÆÆ÷
+	 * ç™»å½•è¡¨å•æäº¤å¤„ç†æ§åˆ¶å™¨
 	 * @param user
 	 * @param cpacha
 	 * @return
@@ -94,35 +103,53 @@ public class SystemController {
 		Map<String, String> ret = new HashMap<String, String>();
 		if(user == null){
 			ret.put("type", "error");
-			ret.put("msg", "ÇëÌîĞ´ÓÃ»§ĞÅÏ¢£¡");
+			ret.put("msg", "è¯·å¡«å†™ç”¨æˆ·ä¿¡æ¯ï¼");
+			return ret;
+		}
+		if(StringUtils.isEmpty(cpacha)){
+			ret.put("type", "error");
+			ret.put("msg", "è¯·å¡«å†™éªŒè¯ç ï¼");
 			return ret;
 		}
 		if(StringUtils.isEmpty(user.getUsername())){
 			ret.put("type", "error");
-			ret.put("msg", "ÇëÌîĞ´ÓÃ»§Ãû£¡");
+			ret.put("msg", "è¯·å¡«å†™ç”¨æˆ·åï¼");
 			return ret;
 		}
 		if(StringUtils.isEmpty(user.getPassword())){
 			ret.put("type", "error");
-			ret.put("msg", "ÇëÌîĞ´ÃÜÂë£¡");
+			ret.put("msg", "è¯·å¡«å†™å¯†ç ï¼");
 			return ret;
 		}
-		Object loginCpacha = request.getSession().getAttribute("loginCpacha");
+		Object loginCpacha = request.getSession().getAttribute("session");
+		if(loginCpacha == null){
+			ret.put("type", "error");
+			ret.put("msg", "ä¼šè¯è¶…æ—¶ï¼Œè¯·åˆ·æ–°é¡µé¢ï¼");
+			return ret;
+		}
+		if(!cpacha.toUpperCase().equals(loginCpacha.toString().toUpperCase())){
+			ret.put("type", "error");
+			ret.put("msg", "éªŒè¯ç é”™è¯¯ï¼");
+			logService.add("ç”¨æˆ·åä¸º"+user.getUsername()+"çš„ç”¨æˆ·ç™»å½•æ—¶è¾“å…¥éªŒè¯ç é”™è¯¯!");
+			return ret;
+		}
 		User findByUsername = userService.findByUsername(user.getUsername());
 		if(findByUsername == null){
 			ret.put("type", "error");
-			ret.put("msg", "¸ÃÓÃ»§Ãû²»´æÔÚ£¡");
+			ret.put("msg", "è¯¥ç”¨æˆ·åä¸å­˜åœ¨ï¼");
+			logService.add("ç™»å½•æ—¶ï¼Œç”¨æˆ·åä¸º"+user.getUsername()+"çš„ç”¨æˆ·ä¸å­˜åœ¨!");
 			return ret;
 		}
 		if(!user.getPassword().equals(findByUsername.getPassword())){
 			ret.put("type", "error");
-			ret.put("msg", "ÃÜÂë´íÎó£¡");
+			ret.put("msg", "å¯†ç é”™è¯¯ï¼");
+			logService.add("ç”¨æˆ·åä¸º"+user.getUsername()+"çš„ç”¨æˆ·ç™»å½•æ—¶è¾“å…¥å¯†ç é”™è¯¯!");
 			return ret;
 		}
-		//ËµÃ÷ÓÃ»§ÃûÃÜÂë¼°ÑéÖ¤Âë¶¼ÕıÈ·
-		//´ËÊ±ĞèÒª²éÑ¯ÓÃ»§µÄ½ÇÉ«È¨ÏŞ
+		//è¯´æ˜ç”¨æˆ·åå¯†ç åŠéªŒè¯ç éƒ½æ­£ç¡®
+		//æ­¤æ—¶éœ€è¦æŸ¥è¯¢ç”¨æˆ·çš„è§’è‰²æƒé™
 		Role role = roleService.find(findByUsername.getRoleId());
-		List<Authority> authorityList = authorityService.findListByRoleId(role.getId());//¸ù¾İ½ÇÉ«»ñÈ¡È¨ÏŞÁĞ±í
+		List<Authority> authorityList = authorityService.findListByRoleId(role.getId());//æ ¹æ®è§’è‰²è·å–æƒé™åˆ—è¡¨
 		String menuIds = "";
 		for(Authority authority:authorityList){
 			menuIds += authority.getMenuId() + ",";
@@ -131,17 +158,18 @@ public class SystemController {
 			menuIds = menuIds.substring(0,menuIds.length()-1);
 		}
 		List<Menu> userMenus = menuService.findListByIds(menuIds);
-		//°Ñ½ÇÉ«ĞÅÏ¢¡¢²Ëµ¥ĞÅÏ¢·Åµ½sessionÖĞ
+		//æŠŠè§’è‰²ä¿¡æ¯ã€èœå•ä¿¡æ¯æ”¾åˆ°sessionä¸­
 		request.getSession().setAttribute("admin", findByUsername);
 		request.getSession().setAttribute("role", role);
 		request.getSession().setAttribute("userMenus", userMenus);
 		ret.put("type", "success");
-		ret.put("msg", "µÇÂ¼³É¹¦£¡");
+		ret.put("msg", "ç™»å½•æˆåŠŸï¼");
+		logService.add("ç”¨æˆ·åä¸º{"+user.getUsername()+"}ï¼Œè§’è‰²ä¸º{"+role.getName()+"}çš„ç”¨æˆ·ç™»å½•æˆåŠŸ!");
 		return ret;
 	}
-	
+
 	/**
-	 * ºóÌ¨ÍË³ö×¢Ïú¹¦ÄÜ
+	 * åå°é€€å‡ºæ³¨é”€åŠŸèƒ½
 	 * @param request
 	 * @return
 	 */
@@ -153,9 +181,9 @@ public class SystemController {
 		request.getSession().setAttribute("userMenus", null);
 		return "redirect:login";
 	}
-	
+
 	/**
-	 * ĞŞ¸ÄÃÜÂëÒ³Ãæ
+	 * ä¿®æ”¹å¯†ç é¡µé¢
 	 * @param model
 	 * @return
 	 */
@@ -164,31 +192,44 @@ public class SystemController {
 		model.setViewName("system/edit_password");
 		return model;
 	}
-	
+
 	@RequestMapping(value="/edit_password",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, String> editPasswordAct(String newpassword,String oldpassword,HttpServletRequest request){
 		Map<String, String> ret = new HashMap<String, String>();
 		if(StringUtils.isEmpty(newpassword)){
 			ret.put("type", "error");
-			ret.put("msg", "ÇëÌîĞ´ĞÂÃÜÂë£¡");
+			ret.put("msg", "è¯·å¡«å†™æ–°å¯†ç ï¼");
 			return ret;
 		}
 		User user = (User)request.getSession().getAttribute("admin");
 		if(!user.getPassword().equals(oldpassword)){
 			ret.put("type", "error");
-			ret.put("msg", "Ô­ÃÜÂë´íÎó£¡");
+			ret.put("msg", "åŸå¯†ç é”™è¯¯ï¼");
 			return ret;
 		}
 		user.setPassword(newpassword);
 		if(userService.editPassword(user) <= 0){
 			ret.put("type", "error");
-			ret.put("msg", "ÃÜÂëĞŞ¸ÄÊ§°Ü£¬ÇëÁªÏµ¹ÜÀíÔ±£¡");
+			ret.put("msg", "å¯†ç ä¿®æ”¹å¤±è´¥ï¼Œè¯·è”ç³»ç®¡ç†å‘˜ï¼");
 			return ret;
 		}
 		ret.put("type", "success");
-		ret.put("msg", "ÃÜÂëĞŞ¸Ä³É¹¦£¡");
+		ret.put("msg", "å¯†ç ä¿®æ”¹æˆåŠŸï¼");
+		logService.add("ç”¨æˆ·åä¸º{"+user.getUsername()+"}ï¼Œçš„ç”¨æˆ·æˆåŠŸä¿®æ”¹å¯†ç !");
 		return ret;
-	} 
-
+	}
+	@RequestMapping(value="/get_cpacha",method=RequestMethod.GET)
+	public void generateCpacha(
+			HttpServletRequest request,
+			HttpServletResponse response){
+		CpachaUtil cpachaUtil =new CpachaUtil();
+		BufferedImage bufferedImage = cpachaUtil.generatorVCodeImag(request);
+		try {
+			ImageIO.write(bufferedImage, "gif", response.getOutputStream());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
