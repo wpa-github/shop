@@ -33,31 +33,31 @@ import cn.edu.imnu.util.CpachaUtil;
 import cn.edu.imnu.util.MenuUtil;
 
 /**
- * ç³»ç»Ÿæ“ä½œç±»æ§åˆ¶å™¨
+ * ÏµÍ³²Ù×÷Àà¿ØÖÆÆ÷
  * @author llq
  *
  */
 @Controller
 @RequestMapping("/system")
 public class SystemController {
-
+	
 	@Autowired
 	private UserService userService;
-
+	
 	@Autowired
 	private RoleService roleService;
-
+	
 	@Autowired
 	private AuthorityService authorityService;
-
+	
 	@Autowired
 	private MenuService menuService;
-
+	
 	@Autowired
 	private LogService logService;
-
+	
 	/**
-	 * ç³»ç»Ÿç™»å½•åçš„ä¸»é¡µ
+	 * ÏµÍ³µÇÂ¼ºóµÄÖ÷Ò³
 	 * @param model
 	 * @return
 	 */
@@ -69,9 +69,9 @@ public class SystemController {
 		model.setViewName("system/index");
 		return model;//WEB-INF/views/+system/index+.jsp = WEB-INF/views/system/index.jsp
 	}
-
+	
 	/**
-	 * ç³»ç»Ÿç™»å½•åçš„æ¬¢è¿é¡µ
+	 * ÏµÍ³µÇÂ¼ºóµÄ»¶Ó­Ò³
 	 * @param model
 	 * @return
 	 */
@@ -81,7 +81,7 @@ public class SystemController {
 		return model;
 	}
 	/**
-	 * ç™»é™†é¡µé¢
+	 * µÇÂ½Ò³Ãæ
 	 * @param model
 	 * @return
 	 */
@@ -90,9 +90,9 @@ public class SystemController {
 		model.setViewName("system/login");
 		return model;
 	}
-
+	
 	/**
-	 * ç™»å½•è¡¨å•æäº¤å¤„ç†æ§åˆ¶å™¨
+	 * µÇÂ¼±íµ¥Ìá½»´¦Àí¿ØÖÆÆ÷
 	 * @param user
 	 * @param cpacha
 	 * @return
@@ -103,53 +103,53 @@ public class SystemController {
 		Map<String, String> ret = new HashMap<String, String>();
 		if(user == null){
 			ret.put("type", "error");
-			ret.put("msg", "è¯·å¡«å†™ç”¨æˆ·ä¿¡æ¯ï¼");
+			ret.put("msg", "ÇëÌîĞ´ÓÃ»§ĞÅÏ¢£¡");
 			return ret;
 		}
 		if(StringUtils.isEmpty(cpacha)){
 			ret.put("type", "error");
-			ret.put("msg", "è¯·å¡«å†™éªŒè¯ç ï¼");
+			ret.put("msg", "ÇëÌîĞ´ÑéÖ¤Âë£¡");
 			return ret;
 		}
 		if(StringUtils.isEmpty(user.getUsername())){
 			ret.put("type", "error");
-			ret.put("msg", "è¯·å¡«å†™ç”¨æˆ·åï¼");
+			ret.put("msg", "ÇëÌîĞ´ÓÃ»§Ãû£¡");
 			return ret;
 		}
 		if(StringUtils.isEmpty(user.getPassword())){
 			ret.put("type", "error");
-			ret.put("msg", "è¯·å¡«å†™å¯†ç ï¼");
+			ret.put("msg", "ÇëÌîĞ´ÃÜÂë£¡");
 			return ret;
 		}
 		Object loginCpacha = request.getSession().getAttribute("session");
 		if(loginCpacha == null){
 			ret.put("type", "error");
-			ret.put("msg", "ä¼šè¯è¶…æ—¶ï¼Œè¯·åˆ·æ–°é¡µé¢ï¼");
+			ret.put("msg", "»á»°³¬Ê±£¬ÇëË¢ĞÂÒ³Ãæ£¡");
 			return ret;
 		}
 		if(!cpacha.toUpperCase().equals(loginCpacha.toString().toUpperCase())){
 			ret.put("type", "error");
-			ret.put("msg", "éªŒè¯ç é”™è¯¯ï¼");
-			logService.add("ç”¨æˆ·åä¸º"+user.getUsername()+"çš„ç”¨æˆ·ç™»å½•æ—¶è¾“å…¥éªŒè¯ç é”™è¯¯!");
+			ret.put("msg", "ÑéÖ¤Âë´íÎó£¡");
+			logService.add("ÓÃ»§ÃûÎª"+user.getUsername()+"µÄÓÃ»§µÇÂ¼Ê±ÊäÈëÑéÖ¤Âë´íÎó!");
 			return ret;
 		}
 		User findByUsername = userService.findByUsername(user.getUsername());
 		if(findByUsername == null){
 			ret.put("type", "error");
-			ret.put("msg", "è¯¥ç”¨æˆ·åä¸å­˜åœ¨ï¼");
-			logService.add("ç™»å½•æ—¶ï¼Œç”¨æˆ·åä¸º"+user.getUsername()+"çš„ç”¨æˆ·ä¸å­˜åœ¨!");
+			ret.put("msg", "¸ÃÓÃ»§Ãû²»´æÔÚ£¡");
+			logService.add("µÇÂ¼Ê±£¬ÓÃ»§ÃûÎª"+user.getUsername()+"µÄÓÃ»§²»´æÔÚ!");
 			return ret;
 		}
 		if(!user.getPassword().equals(findByUsername.getPassword())){
 			ret.put("type", "error");
-			ret.put("msg", "å¯†ç é”™è¯¯ï¼");
-			logService.add("ç”¨æˆ·åä¸º"+user.getUsername()+"çš„ç”¨æˆ·ç™»å½•æ—¶è¾“å…¥å¯†ç é”™è¯¯!");
+			ret.put("msg", "ÃÜÂë´íÎó£¡");
+			logService.add("ÓÃ»§ÃûÎª"+user.getUsername()+"µÄÓÃ»§µÇÂ¼Ê±ÊäÈëÃÜÂë´íÎó!");
 			return ret;
 		}
-		//è¯´æ˜ç”¨æˆ·åå¯†ç åŠéªŒè¯ç éƒ½æ­£ç¡®
-		//æ­¤æ—¶éœ€è¦æŸ¥è¯¢ç”¨æˆ·çš„è§’è‰²æƒé™
+		//ËµÃ÷ÓÃ»§ÃûÃÜÂë¼°ÑéÖ¤Âë¶¼ÕıÈ·
+		//´ËÊ±ĞèÒª²éÑ¯ÓÃ»§µÄ½ÇÉ«È¨ÏŞ
 		Role role = roleService.find(findByUsername.getRoleId());
-		List<Authority> authorityList = authorityService.findListByRoleId(role.getId());//æ ¹æ®è§’è‰²è·å–æƒé™åˆ—è¡¨
+		List<Authority> authorityList = authorityService.findListByRoleId(role.getId());//¸ù¾İ½ÇÉ«»ñÈ¡È¨ÏŞÁĞ±í
 		String menuIds = "";
 		for(Authority authority:authorityList){
 			menuIds += authority.getMenuId() + ",";
@@ -158,18 +158,18 @@ public class SystemController {
 			menuIds = menuIds.substring(0,menuIds.length()-1);
 		}
 		List<Menu> userMenus = menuService.findListByIds(menuIds);
-		//æŠŠè§’è‰²ä¿¡æ¯ã€èœå•ä¿¡æ¯æ”¾åˆ°sessionä¸­
+		//°Ñ½ÇÉ«ĞÅÏ¢¡¢²Ëµ¥ĞÅÏ¢·Åµ½sessionÖĞ
 		request.getSession().setAttribute("admin", findByUsername);
 		request.getSession().setAttribute("role", role);
 		request.getSession().setAttribute("userMenus", userMenus);
 		ret.put("type", "success");
-		ret.put("msg", "ç™»å½•æˆåŠŸï¼");
-		logService.add("ç”¨æˆ·åä¸º{"+user.getUsername()+"}ï¼Œè§’è‰²ä¸º{"+role.getName()+"}çš„ç”¨æˆ·ç™»å½•æˆåŠŸ!");
+		ret.put("msg", "µÇÂ¼³É¹¦£¡");
+		logService.add("ÓÃ»§ÃûÎª{"+user.getUsername()+"}£¬½ÇÉ«Îª{"+role.getName()+"}µÄÓÃ»§µÇÂ¼³É¹¦!");
 		return ret;
 	}
-
+	
 	/**
-	 * åå°é€€å‡ºæ³¨é”€åŠŸèƒ½
+	 * ºóÌ¨ÍË³ö×¢Ïú¹¦ÄÜ
 	 * @param request
 	 * @return
 	 */
@@ -181,9 +181,9 @@ public class SystemController {
 		request.getSession().setAttribute("userMenus", null);
 		return "redirect:login";
 	}
-
+	
 	/**
-	 * ä¿®æ”¹å¯†ç é¡µé¢
+	 * ĞŞ¸ÄÃÜÂëÒ³Ãæ
 	 * @param model
 	 * @return
 	 */
@@ -192,33 +192,34 @@ public class SystemController {
 		model.setViewName("system/edit_password");
 		return model;
 	}
-
+	
 	@RequestMapping(value="/edit_password",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, String> editPasswordAct(String newpassword,String oldpassword,HttpServletRequest request){
 		Map<String, String> ret = new HashMap<String, String>();
 		if(StringUtils.isEmpty(newpassword)){
 			ret.put("type", "error");
-			ret.put("msg", "è¯·å¡«å†™æ–°å¯†ç ï¼");
+			ret.put("msg", "ÇëÌîĞ´ĞÂÃÜÂë£¡");
 			return ret;
 		}
 		User user = (User)request.getSession().getAttribute("admin");
 		if(!user.getPassword().equals(oldpassword)){
 			ret.put("type", "error");
-			ret.put("msg", "åŸå¯†ç é”™è¯¯ï¼");
+			ret.put("msg", "Ô­ÃÜÂë´íÎó£¡");
 			return ret;
 		}
 		user.setPassword(newpassword);
 		if(userService.editPassword(user) <= 0){
 			ret.put("type", "error");
-			ret.put("msg", "å¯†ç ä¿®æ”¹å¤±è´¥ï¼Œè¯·è”ç³»ç®¡ç†å‘˜ï¼");
+			ret.put("msg", "ÃÜÂëĞŞ¸ÄÊ§°Ü£¬ÇëÁªÏµ¹ÜÀíÔ±£¡");
 			return ret;
 		}
 		ret.put("type", "success");
-		ret.put("msg", "å¯†ç ä¿®æ”¹æˆåŠŸï¼");
-		logService.add("ç”¨æˆ·åä¸º{"+user.getUsername()+"}ï¼Œçš„ç”¨æˆ·æˆåŠŸä¿®æ”¹å¯†ç !");
+		ret.put("msg", "ÃÜÂëĞŞ¸Ä³É¹¦£¡");
+		logService.add("ÓÃ»§ÃûÎª{"+user.getUsername()+"}£¬µÄÓÃ»§³É¹¦ĞŞ¸ÄÃÜÂë!");
 		return ret;
 	}
+
 	@RequestMapping(value="/get_cpacha",method=RequestMethod.GET)
 	public void generateCpacha(
 			HttpServletRequest request,

@@ -91,7 +91,7 @@
             <tr>
                 <td width="60" align="right">头像预览:</td>
                 <td valign="middle">
-                	<img id="edit-preview-photo" style="float:left;" src="/BaseProjectSSM/resources/admin/easyui/images/user_photo.jpg" width="100px">
+                	<img id="edit-preview-photo" style="float:left;" src="" width="100px" height="120px">
                 	<a style="float:left;margin-top:40px;" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-upload" onclick="uploadPhoto()" plain="true">上传图片</a>
                 </td>
             </tr>
@@ -298,7 +298,7 @@
                 }
             }],
             onBeforeOpen:function(){
-            	$("#add-form input").val('');
+            	//$("#add-form input").val('');
             }
         });
 	}

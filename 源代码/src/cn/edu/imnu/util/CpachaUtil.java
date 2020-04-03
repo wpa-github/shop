@@ -7,7 +7,7 @@ import java.util.Random;
 public class CpachaUtil {
 	public BufferedImage generatorVCodeImag(HttpServletRequest request){
 			int width = 100;
-		int height = 50;
+		int height = 30;
 		String[] fontNames = new String[]{
 				"黑体", "宋体", "Courier", "Arial",
 				"Verdana", "Times", "Tahoma", "Georgia"};
@@ -38,7 +38,7 @@ public class CpachaUtil {
 			Color color = new Color(ran.nextInt(255), ran.nextInt(255), ran.nextInt(255));
 			g.setColor(color);
 			g.setFont(new Font(fontNames[ran.nextInt(fontNames.length)], fontStyles[ran.nextInt(fontStyles.length)],23));
-			g.drawString(ch+"",width/5*i,height/2);
+			g.drawString(ch+"",width/5*i,height/2+5);
 		}
 		String checkCode_session = sb.toString();
 		//将验证码存入session

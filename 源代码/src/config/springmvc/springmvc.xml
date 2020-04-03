@@ -54,6 +54,15 @@
 			<mvc:exclude-mapping path="/resources/**"/>
 			<bean class="cn.edu.imnu.interceptor.admin.LoginInterceptor"></bean>
 		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/cart/*"/>
+			<mvc:mapping path="/user/*"/>
+			<mvc:mapping path="/favorite/*"/>
+			<mvc:mapping path="/order/*"/>
+			<mvc:mapping path="/address/*"/>
+			<mvc:mapping path="/comment/*"/>
+			<bean class="cn.edu.imnu.interceptor.home.LoginInterceptor"></bean>
+		</mvc:interceptor>
 	</mvc:interceptors>
 	 
 </beans>

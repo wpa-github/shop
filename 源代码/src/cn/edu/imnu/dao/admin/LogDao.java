@@ -9,7 +9,7 @@ import cn.edu.imnu.entity.admin.Authority;
 import cn.edu.imnu.entity.admin.Log;
 
 /**
- * 绯荤粺鏃ュ織绫籨ao
+ * 系统日志类dao
  * @author llq
  *
  */

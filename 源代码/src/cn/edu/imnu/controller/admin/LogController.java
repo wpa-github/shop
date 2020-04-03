@@ -18,7 +18,7 @@ import cn.edu.imnu.page.admin.Page;
 import cn.edu.imnu.service.admin.LogService;
 
 /**
- * æ—¥å¿—ç®¡ç†æ§åˆ¶å™¨
+ * ÈÕÖ¾¹ÜÀí¿ØÖÆÆ÷
  * @author llq
  *
  */
@@ -27,9 +27,9 @@ import cn.edu.imnu.service.admin.LogService;
 public class LogController {
 	@Autowired
 	private LogService logService;
-
+	
 	/**
-	 * æ—¥å¿—åˆ—è¡¨é¡µé¢
+	 * ÈÕÖ¾ÁĞ±íÒ³Ãæ
 	 * @param model
 	 * @return
 	 */
@@ -38,9 +38,9 @@ public class LogController {
 		model.setViewName("log/list");
 		return model;
 	}
-
+	
 	/**
-	 * è·å–æ—¥å¿—åˆ—è¡¨
+	 * »ñÈ¡ÈÕÖ¾ÁĞ±í
 	 * @param page
 	 * @param content
 	 * @param roleId
@@ -50,8 +50,8 @@ public class LogController {
 	@RequestMapping(value="/list",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> getList(Page page,
-									   @RequestParam(name="content",required=false,defaultValue="") String content
-	){
+			@RequestParam(name="content",required=false,defaultValue="") String content
+			){
 		Map<String, Object> ret = new HashMap<String, Object>();
 		Map<String, Object> queryMap = new HashMap<String, Object>();
 		queryMap.put("content", content);
@@ -61,9 +61,9 @@ public class LogController {
 		ret.put("total", logService.getTotal(queryMap));
 		return ret;
 	}
-
+	
 	/**
-	 * æ·»åŠ æ—¥å¿—
+	 * Ìí¼ÓÈÕÖ¾
 	 * @param user
 	 * @return
 	 */
@@ -73,29 +73,29 @@ public class LogController {
 		Map<String, String> ret = new HashMap<String, String>();
 		if(log == null){
 			ret.put("type", "error");
-			ret.put("msg", "è¯·å¡«å†™æ­£ç¡®çš„æ—¥å¿—ä¿¡æ¯ï¼");
+			ret.put("msg", "ÇëÌîĞ´ÕıÈ·µÄÈÕÖ¾ĞÅÏ¢£¡");
 			return ret;
 		}
 		if(StringUtils.isEmpty(log.getContent())){
 			ret.put("type", "error");
-			ret.put("msg", "è¯·å¡«å†™æ—¥å¿—å†…å®¹ï¼");
+			ret.put("msg", "ÇëÌîĞ´ÈÕÖ¾ÄÚÈİ£¡");
 			return ret;
 		}
 		log.setCreateTime(new Date());
 		if(logService.add(log) <= 0){
 			ret.put("type", "error");
-			ret.put("msg", "æ—¥å¿—æ·»åŠ å¤±è´¥ï¼Œè¯·è”ç³»ç®¡ç†å‘˜ï¼");
+			ret.put("msg", "ÈÕÖ¾Ìí¼ÓÊ§°Ü£¬ÇëÁªÏµ¹ÜÀíÔ±£¡");
 			return ret;
 		}
 		ret.put("type", "success");
-		ret.put("msg", "æ—¥å¿—æ·»åŠ æˆåŠŸï¼");
+		ret.put("msg", "ÈÕÖ¾Ìí¼Ó³É¹¦£¡");
 		return ret;
 	}
-
-
-
+	
+	
+	
 	/**
-	 * æ‰¹é‡åˆ é™¤æ—¥å¿—
+	 * ÅúÁ¿É¾³ıÈÕÖ¾
 	 * @param ids
 	 * @return
 	 */
@@ -105,7 +105,7 @@ public class LogController {
 		Map<String, String> ret = new HashMap<String, String>();
 		if(StringUtils.isEmpty(ids)){
 			ret.put("type", "error");
-			ret.put("msg", "é€‰æ‹©è¦åˆ é™¤çš„æ•°æ®ï¼");
+			ret.put("msg", "Ñ¡ÔñÒªÉ¾³ıµÄÊı¾İ£¡");
 			return ret;
 		}
 		if(ids.contains(",")){
@@ -113,13 +113,13 @@ public class LogController {
 		}
 		if(logService.delete(ids) <= 0){
 			ret.put("type", "error");
-			ret.put("msg", "æ—¥å¿—åˆ é™¤å¤±è´¥ï¼Œè¯·è”ç³»ç®¡ç†å‘˜ï¼");
+			ret.put("msg", "ÈÕÖ¾É¾³ıÊ§°Ü£¬ÇëÁªÏµ¹ÜÀíÔ±£¡");
 			return ret;
 		}
 		ret.put("type", "success");
-		ret.put("msg", "æ—¥å¿—åˆ é™¤æˆåŠŸï¼");
+		ret.put("msg", "ÈÕÖ¾É¾³ı³É¹¦£¡");
 		return ret;
 	}
-
-
+	
+	
 }

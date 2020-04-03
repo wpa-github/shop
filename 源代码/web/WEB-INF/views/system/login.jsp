@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>SSM框架后台管理员登录</title>
-  <!--  <meta name="description" content="particles.js is a lightweight JavaScript library for creating particles.">-->
+  <meta name="description" content="particles.js is a lightweight JavaScript library for creating particles.">
   <meta name="author" content="Vincent Garreau">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" media="screen" href="../resources/admin/login/css/style.css">
@@ -36,7 +36,7 @@
 				<div class="login-center-input">
 					<input style="width:50%;" type="text" name="cpacha" id="cpacha" value="" placeholder="请输入验证码" onfocus="this.placeholder=&#39;&#39;" onblur="this.placeholder=&#39;请输入验证码&#39;">
 					<div class="login-center-input-text">验证码</div>
-					<img id="cpacha-img" title="点击切换验证码" style="cursor:pointer;" src="get_cpacha" width="110px" height="30px" onclick="changeCpacha()">
+					<img id="cpacha-img" title="点击切换验证码" style="cursor:pointer;" src="get_cpacha" width="100px" height="30px" onclick="changeCpacha()">
 				</div>
 			</div>
 			<div class="login-button">

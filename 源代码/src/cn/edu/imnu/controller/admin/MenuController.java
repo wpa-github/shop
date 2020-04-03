@@ -22,7 +22,7 @@ import cn.edu.imnu.page.admin.Page;
 import cn.edu.imnu.service.admin.MenuService;
 
 /**
- * èœå•ç®¡ç†æ§åˆ¶å™¨
+ * ²Ëµ¥¹ÜÀí¿ØÖÆÆ÷
  * @author llq
  *
  */
@@ -35,7 +35,7 @@ public class MenuController {
 	
 	
 	/**
-	 * èœå•ç®¡ç†åˆ—è¡¨é¡µ
+	 * ²Ëµ¥¹ÜÀíÁĞ±íÒ³
 	 * @param model
 	 * @return
 	 */
@@ -47,7 +47,7 @@ public class MenuController {
 	}
 	
 	/**
-	 * è·å–èœå•åˆ—è¡¨
+	 * »ñÈ¡²Ëµ¥ÁĞ±í
 	 * @param page
 	 * @param name
 	 * @return
@@ -69,7 +69,7 @@ public class MenuController {
 	}
 	
 	/**
-	 * è·å–æŒ‡å®šç›®å½•ä¸‹çš„ç³»ç»Ÿiconé›†åˆ
+	 * »ñÈ¡Ö¸¶¨Ä¿Â¼ÏÂµÄÏµÍ³icon¼¯ºÏ
 	 * @param request
 	 * @return
 	 */
@@ -82,7 +82,7 @@ public class MenuController {
 		List<String> icons = new ArrayList<String>();
 		if(!file.exists()){
 			ret.put("type", "error");
-			ret.put("msg", "æ–‡ä»¶ç›®å½•ä¸å­˜åœ¨ï¼");
+			ret.put("msg", "ÎÄ¼şÄ¿Â¼²»´æÔÚ£¡");
 			return ret;
 		}
 		File[] listFiles = file.listFiles();
@@ -97,7 +97,7 @@ public class MenuController {
 	}
 	
 	/**
-	 * èœå•æ·»åŠ 
+	 * ²Ëµ¥Ìí¼Ó
 	 * @param menu
 	 * @return
 	 */
@@ -107,17 +107,17 @@ public class MenuController {
 		Map<String, String> ret = new HashMap<String, String>();
 		if(menu == null){
 			ret.put("type", "error");
-			ret.put("msg", "è¯·å¡«å†™æ­£ç¡®çš„èœå•ä¿¡æ¯!");
+			ret.put("msg", "ÇëÌîĞ´ÕıÈ·µÄ²Ëµ¥ĞÅÏ¢!");
 			return ret;
 		}
 		if(StringUtils.isEmpty(menu.getName())){
 			ret.put("type", "error");
-			ret.put("msg", "è¯·å¡«å†™èœå•åç§°!");
+			ret.put("msg", "ÇëÌîĞ´²Ëµ¥Ãû³Æ!");
 			return ret;
 		}
 		if(StringUtils.isEmpty(menu.getIcon())){
 			ret.put("type", "error");
-			ret.put("msg", "è¯·å¡«å†™èœå•å›¾æ ‡ç±»!");
+			ret.put("msg", "ÇëÌîĞ´²Ëµ¥Í¼±êÀà!");
 			return ret;
 		}
 		if(menu.getParentId() == null){
@@ -125,16 +125,16 @@ public class MenuController {
 		}
 		if(menuService.add(menu) <= 0){
 			ret.put("type", "error");
-			ret.put("msg", "æ·»åŠ å¤±è´¥ï¼Œè¯·è”ç³»ç®¡ç†å‘˜!");
+			ret.put("msg", "Ìí¼ÓÊ§°Ü£¬ÇëÁªÏµ¹ÜÀíÔ±!");
 			return ret;
 		}
 		ret.put("type", "success");
-		ret.put("msg", "æ·»åŠ æˆåŠŸ!");
+		ret.put("msg", "Ìí¼Ó³É¹¦!");
 		return ret;
 	}
 	
 	/**
-	 * èœå•ä¿®æ”¹
+	 * ²Ëµ¥ĞŞ¸Ä
 	 * @param menu
 	 * @return
 	 */
@@ -144,17 +144,17 @@ public class MenuController {
 		Map<String, String> ret = new HashMap<String, String>();
 		if(menu == null){
 			ret.put("type", "error");
-			ret.put("msg", "è¯·é€‰æ‹©æ­£ç¡®çš„èœå•ä¿¡æ¯!");
+			ret.put("msg", "ÇëÑ¡ÔñÕıÈ·µÄ²Ëµ¥ĞÅÏ¢!");
 			return ret;
 		}
 		if(StringUtils.isEmpty(menu.getName())){
 			ret.put("type", "error");
-			ret.put("msg", "è¯·å¡«å†™èœå•åç§°!");
+			ret.put("msg", "ÇëÌîĞ´²Ëµ¥Ãû³Æ!");
 			return ret;
 		}
 		if(StringUtils.isEmpty(menu.getIcon())){
 			ret.put("type", "error");
-			ret.put("msg", "è¯·å¡«å†™èœå•å›¾æ ‡ç±»!");
+			ret.put("msg", "ÇëÌîĞ´²Ëµ¥Í¼±êÀà!");
 			return ret;
 		}
 		if(menu.getParentId() == null){
@@ -162,16 +162,16 @@ public class MenuController {
 		}
 		if(menuService.edit(menu) <= 0){
 			ret.put("type", "error");
-			ret.put("msg", "ä¿®æ”¹å¤±è´¥ï¼Œè¯·è”ç³»ç®¡ç†å‘˜!");
+			ret.put("msg", "ĞŞ¸ÄÊ§°Ü£¬ÇëÁªÏµ¹ÜÀíÔ±!");
 			return ret;
 		}
 		ret.put("type", "success");
-		ret.put("msg", "ä¿®æ”¹æˆåŠŸ!");
+		ret.put("msg", "ĞŞ¸Ä³É¹¦!");
 		return ret;
 	}
 	
 	/**
-	 * åˆ é™¤èœå•ä¿¡æ¯
+	 * É¾³ı²Ëµ¥ĞÅÏ¢
 	 * @param id
 	 * @return
 	 */
@@ -183,23 +183,23 @@ public class MenuController {
 		Map<String, String> ret = new HashMap<String, String>();
 		if(id == null){
 			ret.put("type", "error");
-			ret.put("msg", "è¯·é€‰æ‹©è¦åˆ é™¤çš„èœå•ä¿¡æ¯!");
+			ret.put("msg", "ÇëÑ¡ÔñÒªÉ¾³ıµÄ²Ëµ¥ĞÅÏ¢!");
 			return ret;
 		}
 		List<Menu> findChildernList = menuService.findChildernList(id);
 		if(findChildernList != null && findChildernList.size() > 0){
-			//è¡¨ç¤ºè¯¥åˆ†ç±»ä¸‹å­˜åœ¨å­åˆ†ç±»ï¼Œä¸èƒ½åˆ é™¤
+			//±íÊ¾¸Ã·ÖÀàÏÂ´æÔÚ×Ó·ÖÀà£¬²»ÄÜÉ¾³ı
 			ret.put("type", "error");
-			ret.put("msg", "è¯¥åˆ†ç±»ä¸‹å­˜åœ¨å­åˆ†ç±»ï¼Œä¸èƒ½åˆ é™¤!");
+			ret.put("msg", "¸Ã·ÖÀàÏÂ´æÔÚ×Ó·ÖÀà£¬²»ÄÜÉ¾³ı!");
 			return ret;
 		}
 		if(menuService.delete(id) <= 0){
 			ret.put("type", "error");
-			ret.put("msg", "åˆ é™¤å¤±è´¥ï¼Œè¯·è”ç³»ç®¡ç†å‘˜!");
+			ret.put("msg", "É¾³ıÊ§°Ü£¬ÇëÁªÏµ¹ÜÀíÔ±!");
 			return ret;
 		}
 		ret.put("type", "success");
-		ret.put("msg", "åˆ é™¤æˆåŠŸ!");
+		ret.put("msg", "É¾³ı³É¹¦!");
 		return ret;
 	}
 }

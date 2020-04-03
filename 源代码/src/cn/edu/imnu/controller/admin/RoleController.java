@@ -23,25 +23,25 @@ import cn.edu.imnu.service.admin.RoleService;
 
 
 /**
- * è§’è‰²roleæ§åˆ¶å™¨
+ * ½ÇÉ«role¿ØÖÆÆ÷
  * @author llq
  *
  */
 @RequestMapping("/admin/role")
 @Controller
 public class RoleController {
-
+	
 	@Autowired
 	private RoleService roleService;
-
+	
 	@Autowired
 	private AuthorityService authorityService;
-
+	
 	@Autowired
 	private MenuService menuService;
-
+	
 	/**
-	 * è§’è‰²åˆ—è¡¨é¡µé¢
+	 * ½ÇÉ«ÁĞ±íÒ³Ãæ
 	 * @param model
 	 * @return
 	 */
@@ -50,10 +50,10 @@ public class RoleController {
 		model.setViewName("/role/list");
 		return model;
 	}
-
-
+	
+	
 	/**
-	 * è·å–è§’è‰²åˆ—è¡¨
+	 * »ñÈ¡½ÇÉ«ÁĞ±í
 	 * @param page
 	 * @param name
 	 * @return
@@ -61,8 +61,8 @@ public class RoleController {
 	@RequestMapping(value="/list",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> getList(Page page,
-									   @RequestParam(name="name",required=false,defaultValue="") String name
-	){
+			@RequestParam(name="name",required=false,defaultValue="") String name
+			){
 		Map<String, Object> ret = new HashMap<String, Object>();
 		Map<String, Object> queryMap = new HashMap<String, Object>();
 		queryMap.put("name", name);
@@ -72,9 +72,9 @@ public class RoleController {
 		ret.put("total", roleService.getTotal(queryMap));
 		return ret;
 	}
-
+	
 	/**
-	 * è§’è‰²æ·»åŠ 
+	 * ½ÇÉ«Ìí¼Ó
 	 * @param role
 	 * @return
 	 */
@@ -84,26 +84,26 @@ public class RoleController {
 		Map<String, String> ret = new HashMap<String, String>();
 		if(role == null){
 			ret.put("type", "error");
-			ret.put("msg", "è¯·å¡«å†™æ­£ç¡®çš„è§’è‰²ä¿¡æ¯ï¼");
+			ret.put("msg", "ÇëÌîĞ´ÕıÈ·µÄ½ÇÉ«ĞÅÏ¢£¡");
 			return ret;
 		}
 		if(StringUtils.isEmpty(role.getName())){
 			ret.put("type", "error");
-			ret.put("msg", "è¯·å¡«å†™è§’è‰²åç§°ï¼");
+			ret.put("msg", "ÇëÌîĞ´½ÇÉ«Ãû³Æ£¡");
 			return ret;
 		}
 		if(roleService.add(role) <= 0){
 			ret.put("type", "error");
-			ret.put("msg", "è§’è‰²æ·»åŠ å¤±è´¥ï¼Œè¯·è”ç³»ç®¡ç†å‘˜ï¼");
+			ret.put("msg", "½ÇÉ«Ìí¼ÓÊ§°Ü£¬ÇëÁªÏµ¹ÜÀíÔ±£¡");
 			return ret;
 		}
 		ret.put("type", "success");
-		ret.put("msg", "è§’è‰²æ·»åŠ æˆåŠŸï¼");
+		ret.put("msg", "½ÇÉ«Ìí¼Ó³É¹¦£¡");
 		return ret;
 	}
-
+	
 	/**
-	 * è§’è‰²ä¿®æ”¹
+	 * ½ÇÉ«ĞŞ¸Ä
 	 * @param role
 	 * @return
 	 */
@@ -113,26 +113,26 @@ public class RoleController {
 		Map<String, String> ret = new HashMap<String, String>();
 		if(role == null){
 			ret.put("type", "error");
-			ret.put("msg", "è¯·å¡«å†™æ­£ç¡®çš„è§’è‰²ä¿¡æ¯ï¼");
+			ret.put("msg", "ÇëÌîĞ´ÕıÈ·µÄ½ÇÉ«ĞÅÏ¢£¡");
 			return ret;
 		}
 		if(StringUtils.isEmpty(role.getName())){
 			ret.put("type", "error");
-			ret.put("msg", "è¯·å¡«å†™è§’è‰²åç§°ï¼");
+			ret.put("msg", "ÇëÌîĞ´½ÇÉ«Ãû³Æ£¡");
 			return ret;
 		}
 		if(roleService.edit(role) <= 0){
 			ret.put("type", "error");
-			ret.put("msg", "è§’è‰²ä¿®æ”¹å¤±è´¥ï¼Œè¯·è”ç³»ç®¡ç†å‘˜ï¼");
+			ret.put("msg", "½ÇÉ«ĞŞ¸ÄÊ§°Ü£¬ÇëÁªÏµ¹ÜÀíÔ±£¡");
 			return ret;
 		}
 		ret.put("type", "success");
-		ret.put("msg", "è§’è‰²ä¿®æ”¹æˆåŠŸï¼");
+		ret.put("msg", "½ÇÉ«ĞŞ¸Ä³É¹¦£¡");
 		return ret;
 	}
-
+	
 	/**
-	 * åˆ é™¤è§’è‰²ä¿¡æ¯
+	 * É¾³ı½ÇÉ«ĞÅÏ¢
 	 * @param id
 	 * @return
 	 */
@@ -142,28 +142,28 @@ public class RoleController {
 		Map<String, String> ret = new HashMap<String, String>();
 		if(id == null){
 			ret.put("type", "error");
-			ret.put("msg", "è¯·é€‰æ‹©è¦åˆ é™¤çš„è§’è‰²ï¼");
+			ret.put("msg", "ÇëÑ¡ÔñÒªÉ¾³ıµÄ½ÇÉ«£¡");
 			return ret;
 		}
 		try {
 			if(roleService.delete(id) <= 0){
 				ret.put("type", "error");
-				ret.put("msg", "åˆ é™¤å¤±è´¥ï¼Œè¯·è”ç³»ç®¡ç†å‘˜ï¼");
+				ret.put("msg", "É¾³ıÊ§°Ü£¬ÇëÁªÏµ¹ÜÀíÔ±£¡");
 				return ret;
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			ret.put("type", "error");
-			ret.put("msg", "è¯¥è§’è‰²ä¸‹å­˜åœ¨æƒé™æˆ–è€…ç”¨æˆ·ä¿¡æ¯ï¼Œä¸èƒ½åˆ é™¤ï¼");
+			ret.put("msg", "¸Ã½ÇÉ«ÏÂ´æÔÚÈ¨ÏŞ»òÕßÓÃ»§ĞÅÏ¢£¬²»ÄÜÉ¾³ı£¡");
 			return ret;
 		}
 		ret.put("type", "success");
-		ret.put("msg", "è§’è‰²åˆ é™¤æˆåŠŸï¼");
+		ret.put("msg", "½ÇÉ«É¾³ı³É¹¦£¡");
 		return ret;
 	}
-
+	
 	/**
-	 * è·å–æ‰€æœ‰çš„èœå•ä¿¡æ¯
+	 * »ñÈ¡ËùÓĞµÄ²Ëµ¥ĞÅÏ¢
 	 * @return
 	 */
 	@RequestMapping(value="/get_all_menu",method=RequestMethod.POST)
@@ -174,9 +174,9 @@ public class RoleController {
 		queryMap.put("pageSize", 99999);
 		return menuService.findList(queryMap);
 	}
-
+	
 	/**
-	 * æ·»åŠ æƒé™
+	 * Ìí¼ÓÈ¨ÏŞ
 	 * @param ids
 	 * @return
 	 */
@@ -185,16 +185,16 @@ public class RoleController {
 	public Map<String, String> addAuthority(
 			@RequestParam(name="ids",required=true) String ids,
 			@RequestParam(name="roleId",required=true) Long roleId
-	){
+			){
 		Map<String,String> ret = new HashMap<String, String>();
 		if(StringUtils.isEmpty(ids)){
 			ret.put("type", "error");
-			ret.put("msg", "è¯·é€‰æ‹©ç›¸åº”çš„æƒé™ï¼");
+			ret.put("msg", "ÇëÑ¡ÔñÏàÓ¦µÄÈ¨ÏŞ£¡");
 			return ret;
 		}
 		if(roleId == null){
 			ret.put("type", "error");
-			ret.put("msg", "è¯·é€‰æ‹©ç›¸åº”çš„è§’è‰²ï¼");
+			ret.put("msg", "ÇëÑ¡ÔñÏàÓ¦µÄ½ÇÉ«£¡");
 			return ret;
 		}
 		if(ids.contains(",")){
@@ -211,12 +211,12 @@ public class RoleController {
 			authorityService.add(authority);
 		}
 		ret.put("type", "success");
-		ret.put("msg", "æƒé™ç¼–è¾‘æˆåŠŸï¼");
+		ret.put("msg", "È¨ÏŞ±à¼­³É¹¦£¡");
 		return ret;
 	}
-
+	
 	/**
-	 * è·å–æŸä¸ªè§’è‰²çš„æ‰€æœ‰æƒé™
+	 * »ñÈ¡Ä³¸ö½ÇÉ«µÄËùÓĞÈ¨ÏŞ
 	 * @param roleId
 	 * @return
 	 */
@@ -224,7 +224,7 @@ public class RoleController {
 	@ResponseBody
 	public List<Authority> getRoleAuthority(
 			@RequestParam(name="roleId",required=true) Long roleId
-	){
+		){
 		return authorityService.findListByRoleId(roleId);
 	}
 }

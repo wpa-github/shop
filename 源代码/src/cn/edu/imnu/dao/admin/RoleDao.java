@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import cn.edu.imnu.entity.admin.Role;
 
 /**
- * è§’è‰²role dao
+ * ½ÇÉ«role dao
  * @author llq
  *
  */
