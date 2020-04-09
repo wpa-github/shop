@@ -14,21 +14,25 @@
 </head>
 <body>
 	<!-- Header  -wll-2013/03/24 -->
+
 	<div class="shop_hd">
 		<!-- Header TopNav -->
 		<div class="shop_hd_topNav">
 			<div class="shop_hd_topNav_all">
 				<!-- Header TopNav Left -->
 				<div class="shop_hd_topNav_all_left">
-					<p>您好，欢迎来到<b><a href="/OnlineShop">在线购物商城</a></b>
+					<p>您好 <c:if test="${account != null }">${account.name} </c:if>，欢迎来到<b><a href="../home/index">在线购物商城</a></b>
 						<c:if test="${account == null }">
 						[<a href="../home/login">登录</a>][<a href="../home/register">注册</a>]
 						</c:if>
-						<c:if test="${account != null }">
-						[${account.name }]
+                        <c:if test="${account != null }">
+							[<a href = "../home/index" onclick="tuichuxitong()">退出系统</a>]
 						</c:if>
+
+
 					</p>
 				</div>
+
 				<!-- Header TopNav Left End -->
 
 				<!-- Header TopNav Right -->
@@ -74,7 +78,7 @@
 
 		<!-- TopHeader Center -->
 		<div class="shop_hd_header">
-			<div class="shop_hd_header_logo"><h1 class="logo"><a href="/OnlineShop"><img src="../resources/home/images/logo.png" alt="ShopCZ" /></a><span>猿来入此</span></h1></div>
+			<div class="shop_hd_header_logo"><h1 class="logo"><a href="/OnlineShop"><img src="../resources/home/images/logo.png" alt="ShopCZ" /></a><span>zxgw</span></h1></div>
 			<div class="shop_hd_header_search">
                             <ul class="shop_hd_header_search_tab">
 			        <li id="search" class="current">商品</li>
@@ -131,7 +135,7 @@
 
 			<!-- 普通导航菜单 -->
 			<ul class="shop_hd_menu_nav">
-				<li class="${currentHome }link"><a href="/OnlineShop"><span>首页</span></a></li>
+				<li class="${currentHome }link"><a href="../home/index"><span>首页</span></a></li>
 				<li class="${currentCart }link"><a href="../cart/list"><span>购物车</span></a></li>
 				<li class="${currentUser }link"><a href="../user/info"><span>个人中心</span></a></li>
 			</ul>
@@ -142,5 +146,12 @@
 
 
 	</div>
+	<input type="hidden" value="${account}" name="hh"></input>
+	<script>
+        function tuichuxitong() {
+            alert("${account}");
+        }
+	</script>
 	<div class="clear"></div>
 	<!-- Header End -->
+</body>

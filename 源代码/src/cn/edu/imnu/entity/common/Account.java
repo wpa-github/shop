@@ -36,8 +36,6 @@ public class Account {
 		this.id = id;
 	}
 
-	
-
 	public String getName() {
 		return name;
 	}

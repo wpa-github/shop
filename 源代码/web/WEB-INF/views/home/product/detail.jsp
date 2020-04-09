@@ -26,7 +26,7 @@
 		<!-- 商品展示 -->
 		<div class="shop_goods_show">
 			<div class="shop_goods_show_left">
-				<!-- 京东商品展示 -->
+				<!-- 商品展示 -->
 				<link rel="stylesheet" href="../resources/home/css/shop_goodPic.css" type="text/css" />
 				<script type="text/javascript" src="../resources/home/js/shop_goodPic_base.js"></script>
 				<script type="text/javascript" src="../resources/home/js/lib.js"></script>

@@ -248,13 +248,14 @@
 	* 删除记录
 	*/
 	function remove(){
+        var item = $('#data-datagrid').datagrid('getSelections');
+        if(item == null || item.length == 0){
+            $.messager.alert('信息提示','请选择要删除的数据！','info');
+            return;
+        }
 		$.messager.confirm('信息提示','确定要删除该记录？', function(result){
 			if(result){
-				var item = $('#data-datagrid').datagrid('getSelections');
-				if(item == null || item.length == 0){
-					$.messager.alert('信息提示','请选择要删除的数据！','info');
-					return;
-				}
+
 				var ids = '';
 				for(var i=0;i<item.length;i++){
 					ids += item[i].id + ',';

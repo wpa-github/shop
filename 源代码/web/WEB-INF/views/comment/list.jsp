@@ -121,13 +121,14 @@
 	* 删除记录
 	*/
 	function remove(){
+        var item = $('#data-datagrid').datagrid('getSelected');
+        if(item == null || item.length == 0){
+            $.messager.alert('信息提示','请选择要删除的数据！','info');
+            return;
+        }
 		$.messager.confirm('信息提示','确定要删除该记录？', function(result){
 			if(result){
-				var item = $('#data-datagrid').datagrid('getSelected');
-				if(item == null || item.length == 0){
-					$.messager.alert('信息提示','请选择要删除的数据！','info');
-					return;
-				}
+
 				$.ajax({
 					url:'delete',
 					dataType:'json',

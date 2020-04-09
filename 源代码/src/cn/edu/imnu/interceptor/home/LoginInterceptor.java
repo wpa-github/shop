@@ -40,7 +40,6 @@ public class LoginInterceptor implements HandlerInterceptor {
 		Object account = request.getSession().getAttribute("account");
 		if(account == null){
 			//表示未登录或者登录失效
-			System.out.println("链接"+requestURI+"进入拦截器！");
 			String header = request.getHeader("X-Requested-With");
 			//判断是否是ajax请求
 			if("XMLHttpRequest".equals(header)){

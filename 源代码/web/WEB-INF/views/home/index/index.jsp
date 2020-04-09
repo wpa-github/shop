@@ -56,7 +56,9 @@
                             <c:forEach items="${lastProductList }" var="product">
                             <li style="width:158px;height:190px;">
                                 <dl>
-                                    <dt><a href="../product/detail?id=${product.id }"><img src="${product.imageUrl }" style="width:158px;" /></a></dt>
+                                    <dt><a href="../product/detail?id=${product.id }">
+                                        <img src="${product.imageUrl }" style="width:158px;" />
+                                    </a></dt>
                                     <dd><a href="../product/detail?id=${product.id }">${product.name }</a></dd>
                                     <dd>商城价：<em>${product.price }</em>元</dd>
                                 </dl>
@@ -75,7 +77,8 @@
                             <c:forEach items="${sellProductList }" var="product">
                             <li style="width:158px;height:190px;">
                                 <dl>
-                                    <dt><a href="../product/detail?id=${product.id }"><img style="width:158px;" src="${product.imageUrl }" /></a></dt>
+                                    <dt><a href="../product/detail?id=${product.id }">
+                                        <img style="width:158px;" src="${product.imageUrl }" /></a></dt>
                                     <dd><a href="../product/detail?id=${product.id }">${product.name }</a></dd>
                                     <dd>商城价：<em>${product.price }</em>元</dd>
                                 </dl>

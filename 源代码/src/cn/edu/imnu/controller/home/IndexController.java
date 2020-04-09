@@ -56,7 +56,6 @@ public class IndexController {
 		model.setViewName("home/index/index");
 		return model;
 	}
-	
 	/**
 	 * ÓÃ»§µÇÂ¼Ò³Ãæ
 	 * @param model

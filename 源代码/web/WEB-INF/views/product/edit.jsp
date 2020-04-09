@@ -143,7 +143,7 @@ function back(){
 	window.history.go(-1);
 }
 	/**
-	*  添加记录
+	*  修改记录
 	*/
 	function edit(){
 		var validate = $("#edit-form").form("validate");
