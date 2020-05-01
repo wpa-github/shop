@@ -187,5 +187,10 @@ public class IndexController {
 		ret.put("type", "success");
 		return ret;
 	}
-	
+	@RequestMapping(value = "/zhuxiao",method = RequestMethod.POST)
+	@ResponseBody
+	public void zhuxiao(Account account,HttpServletRequest request)
+	{
+		request.getSession().setAttribute("account", null);
+	}
 }

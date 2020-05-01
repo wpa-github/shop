@@ -194,7 +194,7 @@ public class ProductController {
 		product.setTags(productCategory.getTags() + "," + productCategory.getId());
 		if(productService.edit(product) <= 0){
 			ret.put("type", "error");
-			ret.put("msg", "编辑失败，请联系管理员!");
+			ret.put("msg", "编辑失败，请联系管!");
 			return ret;
 		}
 		ret.put("type", "success");

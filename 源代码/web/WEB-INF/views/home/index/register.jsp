@@ -75,7 +75,7 @@
 	</div>
 	
 	<div class="footer clear wrap1000">
-		<p> <a href="/OnlineShop">首页</a> | <a href="">招聘英才</a> | <a href="">广告合作</a> | <a href="http://programmer.ischoolbar.com">关于猿来入此</a> | <a href="">联系我们</a></p>
+		<p> <a href="../home/index">首页</a> | <a href="">招聘英才</a> | <a href="">广告合作</a> | <a href="http://programmer.ischoolbar.com">关于猿来入此</a> | <a href="">联系我们</a></p>
 		<p>Copyright 2020 【wangpingan】 Inc.,All rights reserved.</p>
 	</div>
 </body>

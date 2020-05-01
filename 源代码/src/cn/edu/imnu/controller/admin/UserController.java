@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.sun.org.apache.xpath.internal.SourceTree;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -220,7 +221,8 @@ public class UserController {
 			return ret;
 		}
 		String savePath = request.getServletContext().getRealPath("/") + "/resources/upload/";
-		File savePathFile = new File(savePath);
+		System.out.println(request.getServletContext().getContextPath());
+        File savePathFile = new File(savePath);
 		if(!savePathFile.exists()){
 			//若不存在改目录，则创建目录
 			savePathFile.mkdir();

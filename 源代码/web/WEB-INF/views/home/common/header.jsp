@@ -11,6 +11,12 @@
         <script type="text/javascript" src="../resources/home/js/jquery.js" ></script>
         <script type="text/javascript" src="../resources/home/js/topNav.js" ></script>
         <script type="text/javascript" src="../resources/home/js/focus.js" ></script>
+	<script>
+		function zhuxiao() {
+		    document.getElementById()
+
+        }
+	</script>
 </head>
 <body>
 	<!-- Header  -wll-2013/03/24 -->
@@ -25,11 +31,20 @@
 						<c:if test="${account == null }">
 						[<a href="../home/login">登录</a>][<a href="../home/register">注册</a>]
 						</c:if>
-                        <c:if test="${account != null }">
-							[<a href = "../home/index" onclick="tuichuxitong()">退出系统</a>]
-						</c:if>
+						<c:if test="${account != null}"><a href="" id="zhuxiao">[注销]</a></c:if>
+						<script>
+							$("#zhuxiao"). click(function () {
+                                var reslt = confirm("您确定要注销吗？")
+                                    if(reslt)
+									{
+                                        $.ajax({
+                                            url:'zhuxiao',
+                                            type:'POST',
+                                        });
+									}
+                            });
 
-
+						</script>
 					</p>
 				</div>
 
@@ -78,24 +93,20 @@
 
 		<!-- TopHeader Center -->
 		<div class="shop_hd_header">
-			<div class="shop_hd_header_logo"><h1 class="logo"><a href="/OnlineShop"><img src="../resources/home/images/logo.png" alt="ShopCZ" /></a><span>zxgw</span></h1></div>
+			<div class="shop_hd_header_logo"><h1 class="logo"><img src="../resources/home/images/logo.png" alt="在线商城" /><span>在线商城</span></h1></div>
 			<div class="shop_hd_header_search">
                             <ul class="shop_hd_header_search_tab">
 			        <li id="search" class="current">商品</li>
-			       
 			    </ul>
-                            <div class="clear"></div>
 			    <div class="search_form">
 			    	<form method="post" action="../product/search">
 			    		<div class="search_formstyle">
-			    			<input type="text" class="search_form_text" name="search_content" placeholder="搜索其实很简单！" value="${search_content }" />
+			    			<input type="text" class="search_form_text" name="search_content" placeholder="搜索您需要的商品" value="${search_content }" />
 			    			<input type="submit" class="search_form_sub" name="secrch_submit" value="" title="搜索" />
 			    		</div>
 			    	</form>
 			    </div>
                             <div class="clear"></div>
-			    
-
 			</div>
 		</div>
 		<div class="clear"></div>
@@ -146,12 +157,6 @@
 
 
 	</div>
-	<input type="hidden" value="${account}" name="hh"></input>
-	<script>
-        function tuichuxitong() {
-            alert("${account}");
-        }
-	</script>
 	<div class="clear"></div>
 	<!-- Header End -->
 </body>

@@ -80,7 +80,7 @@
                                     <dt><a href="../product/detail?id=${product.id }">
                                         <img style="width:158px;" src="${product.imageUrl }" /></a></dt>
                                     <dd><a href="../product/detail?id=${product.id }">${product.name }</a></dd>
-                                    <dd>商城价：<em>${product.price }</em>元</dd>
+                                    <dd>价格：<em>${product.price }</em>元</dd>
                                 </dl>
                             </li>
                             </c:forEach>

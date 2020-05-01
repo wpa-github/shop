@@ -129,7 +129,7 @@ public class OrderController {
 		}
 		if(orderService.edit(order) <= 0){
 			ret.put("type", "error");
-			ret.put("msg", "±à¼­Ê§°Ü£¬ÇëÁªÏµ¹ÜÀíÔ±!");
+			ret.put("msg", "±à¼­Ê§°Ü!");
 			return ret;
 		}
 		ret.put("type", "success");
